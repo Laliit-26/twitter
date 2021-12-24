@@ -1,5 +1,10 @@
+
+/* *{
+  background-color: black;
+ 
+} */
 button{
-    width: 18rem;
+    width: 16rem;
     height: 2.5rem;
     border-radius:50px;
   }
@@ -27,9 +32,7 @@ button{
   
    
   }
-  body{
-    background-color: grey;
-  }
+
   .formHeading{
     font-size: 1.5rem;
     font-weight: 700;

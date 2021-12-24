@@ -1,0 +1,29 @@
+.Audio{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+  }
+  .headphone{
+   background-image: url("https://www.freeiconspng.com/thumbs/headphones-png/headphones-png-26.png");
+   background-position: 100%;
+   background-repeat: no-repeat;
+   /* padding: 52vh 50% 15vh 0; */
+   padding: 59vh 13% 23vh 67px;
+  
+  }
+
+  @media only screen and (max-width:420px) {
+   .Audio{
+      display: flex;
+      flex-direction: column;
+   }
+ .headphone{
+   padding: 59vh 47% 23vh 67px;
+
+  }
+  .react-audio-player {
+  
+   margin: -130px;
+  }
+ 
+ }

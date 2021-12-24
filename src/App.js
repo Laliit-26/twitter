@@ -10,16 +10,14 @@ import TwitterHome from './twitterComponents/TwitterHome';
 
 function App() {
   return (
+  
 <Router>
-
   <Routes>
     <Route exact path="/" element={<Home/>}/>
    <Route exact path="/feed" element={<TwitterHome/>}/>
-    {/* <Route exact path="/register" element={<TwitterRegistrationForm/>}/> */}
-    
   </Routes>
-
 </Router>
+
   );
 }
 

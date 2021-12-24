@@ -11,7 +11,7 @@ const [formresponse, setformresponse] = useState({});
 const [errstatus,seterrstatus]=useState('');
     async function onFormSubmit(e){
      e.preventDefault();
-   await axios.post('http://localhost:1000/auth/register',form)
+   await axios.post('http://localhost:2000/auth/register',form)
     .then( (res)=>{ 
        console.log(res);
        res=res.data;

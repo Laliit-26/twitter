@@ -1,8 +1,13 @@
-import React from 'react';
+import React,{useEffect,useState} from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
-import './Twitter.css'
+import PersonIcon from "@mui/icons-material/Person";
+import '../styles/TwitterRight.css';
+import axios from 'axios';
+import TwitterRightSideNews from './TwitterRightComponents/TwitterRightSideNews';
+const NewsAPI = require('newsapi');
+const newsapi = new NewsAPI('28c667c7e8114eb69659e1bd32ce9979');
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -49,10 +54,65 @@ const Search = styled('div')(({ theme }) => ({
 
 
 function TwitterRightSide() {
+  const [userdata, setuserdata] = useState(null);
+  const[show,setshow]=useState(0);
+  const[follow,setfollow]=useState('follow');
+  const[news,setNews]=useState(null);
+
+  useEffect(() => {
+    axios.get('https://newsdata.io/api/1/news?apikey=pub_294299c7f3dab969a70810411e87dd735952',{headers: {
+      'Content-Type': 'application/json'
+      }}).then((data)=>{
+      setNews(data);
+      console.log(data);
+    })
+    
+  }, [])
+
+
+  useEffect( () => {
+    axios.post('http://localhost:2000/auth/user',{
+        "offset":show
+      }
+          ).then((data)=>{
+            setuserdata(data);
+            console.log(data);
+            
+            
+           
+          })
+    
+  },[show]);
+
+  function followsomeone(followingUserId){
+  
+  
+    axios.post('http://localhost:2000/follow/follow-user',{
+        "followingUserId":followingUserId,
+        "followerUserId":"61bed84c0bd43477309a09ae"
+      }
+          ).then((data)=>{
+            // setuserdata(data);
+            console.log(data);
+            document.getElementById(followingUserId).style.backgroundColor="blue";
+            document.getElementById(followingUserId).style.innerText='following';
+            // console.log(blogdata.data.data[0].data);
+           
+          })
+ 
+}
+
+
+
+
+  if(!userdata)return null;
     return (
         <>
-        <div className="right" >
-            <div style={{border:"2px solid #eff3f4",borderRadius:"20px",width:"33%"}}>
+        <div style={{marginLeft:"10px"}}>
+            <div style={{border:"2px solid #eff3f4",borderRadius:"20px",width:"21rem",position:"sticky",
+            top:"0",
+            zIndex:"100",
+            backgroundColor:"white"}}>
             <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -63,27 +123,50 @@ function TwitterRightSide() {
             />
           </Search>
           </div>
-          <div style={{border:"2px solid #eff3f4",width:"21rem",borderRadius:"10px",marginTop:"15px",padding:"8px"}}>
+          {/* <div  className='right-side'>
               <h2>What's happening</h2>
-              <p>News.LIVE</p>
-              <h6>Chief of Defence Staff General<br/> Bipin Rawat and 12 others die in a <br/> helicopter crash in Tamil Nadu</h6>
-              <p>Trending with #BipinRawat,Chief of Defence Staff</p>
-              <hr/>
-              <p>News.LIVE</p>
-              <h6>Chief of Defence Staff General<br/> Bipin Rawat and 12 others die in a <br/> helicopter crash in Tamil Nadu</h6>
-              <p>Trending with #BipinRawat,Chief of Defence Staff</p>
-              <hr/>
-              <p>News.LIVE</p>
-              <h6>Chief of Defence Staff General<br/> Bipin Rawat and 12 others die in a <br/> helicopter crash in Tamil Nadu</h6>
-              <p>Trending with #BipinRawat,Chief of Defence Staff</p>
-              <hr/>
-              <p>News.LIVE</p>
-              <h6>Chief of Defence Staff General<br/> Bipin Rawat and 12 others die in a <br/> helicopter crash in Tamil Nadu</h6>
-              <p>Trending with #BipinRawat,Chief of Defence Staff</p>
-              <hr/>
+              <p>COVID-19 . LIVE</p>
+              <h5>COVID-19 LIVE Covovax gets emergency use approval </h5>
 
-          </div>
+              <p>Trending with #BipinRawat,Chief of Defence Staff</p>
+              <hr/>
+              <p>News.LIVE</p>
+              <h5>COVID-19 LIVE Covovax gets emergency use approval</h5>
+              <p>Trending with #BipinRawat,Chief of Defence Staff</p>
+              <hr/>
+            
+
+          </div> */}
+          {news?<TwitterRightSideNews/>:null}
+          <div className='right-side' id='follow-someone'>
+          <h2>Who to follow</h2>
+        { userdata.data.data[0].data.map((oneuser)=>{
+         return  <>
+              <div className='follow'>
+                <div className='imageicon'>
+              <PersonIcon style={{ fontSize: 30 }} />
+              </div>
+              <div className='user-details'>
+                <div className='user-name'>{oneuser.username}</div>
+                <div className='name'>{oneuser.name}</div>
+              </div>
+              <div className='space'></div>
+              <div >
+                <button className='followbutton' id={oneuser._id} onClick={()=>followsomeone(oneuser._id)}>follow</button>
+              </div>
+              </div>
+              </>
+
+       
+          })}
+            
+             <div className="show-more-right"   
+              onClick={(e)=>{setshow(show+6)}}> Show more</div>
+               </div>
         </div>
+        
+      
+                       
         </>
     );
 }

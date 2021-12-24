@@ -1,9 +1,12 @@
-.App {
+/* .App {
   text-align: center;
-}
+} */
+/* *{
+  background-color: white;
+} */
 
 
-.App-logo {
+/* .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
@@ -12,7 +15,7 @@
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-}
+} */
 
 /* .App-header {
   background-color: #282c34;
@@ -69,11 +72,11 @@ h4 {
   flex-direction: column;
 }
 
-button {
+/* button {
   width: 18rem;
   height: 2.5rem;
   border-radius: 50px;
-}
+} */
 
 .homePage {
   position: relative;

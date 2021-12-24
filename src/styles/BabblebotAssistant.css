@@ -1,0 +1,103 @@
+.header{
+  background-color: #0d2050;
+  display: flex;
+  color: white;
+  height: 50px;
+  justify-content: space-around;
+  padding: 12px;
+}
+.header_btn{
+  display: flex;
+}
+.main {
+  background-image: url("https://webcammictest.com/static/mic-ffbb534acd7d6c917e789ef71335e8b9.svg");
+    background-position: 100%;
+    background-repeat: no-repeat;
+   
+    padding: 52vh 26% 27vh 30vw;
+}
+/* h1 {
+  display: flex;
+  justify-content: center;
+  background: rgb(255, 0, 10);
+  background: linear-gradient(
+    328deg,
+    rgba(255, 0, 10, 1) 29%,
+    rgba(66, 133, 244, 1) 82%
+  );
+  color: white;
+} */
+
+
+
+.on {
+  height: 80px;
+  width: 80px;
+  background-color: #4285f4;
+  border-radius: 50%;
+  display: flex;
+}
+.dots {
+  height: 70px;
+  width: 70px;
+  background-color: white;
+  border-radius: 50%;
+  margin: auto;
+}
+.off {
+  height: 80px;
+  width: 80px;
+  background-color: red;
+  border-radius: 50%;
+  display: flex;
+}
+.mic {
+  margin-left: 10px;
+}
+
+.message {
+/* border: 1px solid black; */
+  width: 500px;
+  height: 80px;
+  border-radius: 10px;
+  font-size: xx-large;
+  color:black;
+  /* margin-top: 30px; */
+  margin-left: 20px;
+}
+
+p {
+  margin-top: 4px;
+  padding: 7px;
+  width: 200px;
+  font-size: larger;
+  color:black;
+}
+
+
+
+.newMessage{
+  display: flex;
+  flex-direction: row;
+}
+.diffrent{
+  display: flex;
+   flex-direction: row-reverse;
+    align-items: center;
+    justify-content: center;
+}
+@media only screen and (max-width:420px) {
+
+  .react-audio-player{
+    margin-top:20%;
+    margin-left:13% ;
+  }
+  h1{
+    font-size: x-large;
+  }
+  .diffrent{
+    /* display: flex; */
+     flex-direction: column;
+  }
+
+}

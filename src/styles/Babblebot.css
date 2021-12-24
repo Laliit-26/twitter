@@ -1,0 +1,26 @@
+.header{
+    background-color: #0d2050;
+    display: flex;
+    color: white;
+    height: 50px;
+    justify-content: space-around;
+    padding: 12px;
+  }
+  .header_btn{
+    display: flex;
+  }
+  a {
+    color: white;
+    text-decoration: none;
+    padding: 14px;
+  }
+  a:hover {
+    color:white;
+}
+@media only screen and (max-width:420px) {
+
+a{
+  padding:5px;
+}
+
+}

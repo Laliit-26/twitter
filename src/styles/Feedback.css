@@ -1,0 +1,26 @@
+button{
+    color: black;
+    padding:4px;
+    width: 15%;
+    margin: 5px;
+    border-radius: 10px;
+    border: none;
+
+}
+.submit{
+   background-color: #4285f4;
+}
+.Form{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* align-items: center; */
+    width: 45%;
+    margin: auto;
+    padding:40px;
+    margin-top: 20px;
+    /* border: 2px solid black; */
+}
+input{
+    width:40%;
+}

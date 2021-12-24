@@ -1,0 +1,50 @@
+.right-side{
+    border:2px solid #eff3f4;
+    width:21rem;
+    border-radius:10px;
+    margin-top:15px;
+    padding:8px;
+    box-shadow: 17px 18px 8px -17px rgba(0,0,0,0.64);
+    padding: 1rem 1rem;
+}
+.follow{
+    display: flex;
+    justify-content: flex-start;
+    margin:1.5rem 1rem;
+}
+.space{
+    flex:1;
+}
+.user-details{
+    padding-left:1rem;
+}
+.user-name{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 550;
+}
+.followbutton{
+    justify-items: right;
+    font-size: 1.1rem;
+                background-color: rgb(43, 40, 40);
+                color: white;
+                width : 6rem;
+                border-radius: 35px;
+                height: 2rem;
+                border: none;
+                text-align:center;
+                cursor: pointer;
+}
+.show-more-right{
+    margin:2rem auto;
+   
+    background-color: rgb(29, 155, 240);
+    color: white;
+    width : 6rem;
+    border-radius: 35px;
+    height: 2rem;
+    border: none;
+    text-align:center;
+    align-items: center;
+    cursor: pointer;
+    
+}

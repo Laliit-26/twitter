@@ -1,0 +1,17 @@
+.footer{
+background-color: #0d2050;
+height: 17vh;
+color: white;
+display: flex;
+justify-content:space-around
+}
+.text{
+    font-size: 0.7rem;
+}
+.services{
+    display: flex;
+    flex-direction: column;
+}
+.atag{
+    padding: 0px;
+}
