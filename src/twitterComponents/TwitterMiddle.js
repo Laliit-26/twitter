@@ -151,7 +151,9 @@ onDone={({ base64 }) => setItem({ ...item, images: base64 })}
               <div className="blog-icons">
                 <ChatBubbleOutlineIcon />
                 <KeyboardReturnIcon />
-                <FavoriteBorderIcon />
+                 <button className="image" onClick={()=>setimage(!image)}><FavoriteBorderIcon
+              style={{ color: "rgb(29, 155, 240)", marginLeft: "5px" }}
+            /></button> 
                 <IosShareIcon />
               </div>
           

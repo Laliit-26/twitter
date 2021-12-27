@@ -2,17 +2,20 @@ import React,{useState,useContext} from 'react'
 import '../Registration/TwitterRegistrationForm.css';
 import cross from '../assets/cross.jpg';
 import axios from 'axios';
-import {Link} from "react-router-dom";
+// import {Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 // import  { Redirect } from 'react-router-dom';
 
 import TwitterHome from '../twitterComponents/TwitterHome';
+import { Navigate } from 'react-router';
 function Login({setloginstate}) {
     const [form, setform] = useState({loginId:"",password:""});
     const [formresponse, setformresponse] = useState({});
     const [errstatus,seterrstatus]=useState('');
     const[log,setlog]=useState(false);
 
+    const navigate=useNavigate();
     
     async function onFormSubmit(e){
         e.preventDefault();
@@ -28,6 +31,7 @@ function Login({setloginstate}) {
             // setfeed(true);
             // <Redirect to='/Feed'  />
             setlog(true);
+        navigate('/feed');
             }
         else{
             seterrstatus(res.error);
@@ -53,7 +57,8 @@ function Login({setloginstate}) {
            <div className="tagName">
            <input className="tagInput" value={form.password} onChange={(e)=>{setform({...form,password:e.target.value});seterrstatus('')}} placeholder="Password"  type="text" id="password" name="password" required/></div>
            <div className="status" style={{height:'2rem'}}>{errstatus}</div>
-           {log?<Link to="/Feed"><button style={{width:'4rem',padding:'0rem'}}>Home</button></Link>:null}
+           {/* {log?<Link to="/Feed"><button style={{width:'4rem',padding:'0rem'}}>Home</button></Link>:null} */}
+               {/* {log?:null} */}
            <button  className="submit" type="submit">Next</button>
         </form>
         
