@@ -53,10 +53,9 @@ const Search = styled('div')(({ theme }) => ({
   }));
 
 
-function TwitterRightSide() {
+function TwitterRightSide({setfollow}) {
   const [userdata, setuserdata] = useState(null);
   const[show,setshow]=useState(0);
-  const[follow,setfollow]=useState('follow');
   const[news,setNews]=useState(null);
 
   useEffect(() => {
@@ -85,15 +84,15 @@ function TwitterRightSide() {
   },[show]);
 
   function followsomeone(followingUserId){
-  
-  
+
     axios.post('http://localhost:2000/follow/follow-user',{
         "followingUserId":followingUserId,
-        "followerUserId":"61bed84c0bd43477309a09ae"
+        "followerUserId":localStorage.getItem("userId")
       }
           ).then((data)=>{
             // setuserdata(data);
             console.log(data);
+            setfollow(true);
             document.getElementById(followingUserId).style.backgroundColor="blue";
             document.getElementById(followingUserId).style.innerText='following';
             // console.log(blogdata.data.data[0].data);

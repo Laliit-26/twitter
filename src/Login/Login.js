@@ -30,8 +30,12 @@ function Login({setloginstate}) {
             // setloginstate(false);
             // setfeed(true);
             // <Redirect to='/Feed'  />
+            localStorage.setItem('userId',res.data._id);
             setlog(true);
-        navigate('/feed');
+            setTimeout(() => {
+                navigate('/feed');
+            }, 300);
+       
             }
         else{
             seterrstatus(res.error);

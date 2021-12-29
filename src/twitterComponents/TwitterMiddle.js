@@ -18,18 +18,18 @@ import FileBase64 from 'react-file-base64';
 import axios from 'axios';
 
 // import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
-function TwitterMiddle() {
-  const [blogdata, setblogdata] = useState(null);
+function TwitterMiddle({follow}) {
+  const [blogdata, setblogdata] = useState();
   const[item,setItem]=useState({bodyText:"",images:""});
   const[del,setdel]=useState(false);
   const[show,setshow]=useState(0);
   const[image,setimage]=useState(false);
  
  
-  function deletetweet(blogId,userId){
+  function deletetweet(blogId){
     axios.post('http://localhost:2000/blogs/delete-blog',{
       "blogId":blogId,
-      "userId":userId
+      "userId":localStorage.getItem("userId")
     }).then((data)=>{
       console.log(data);
       setdel(true);
@@ -38,7 +38,7 @@ function TwitterMiddle() {
   function sendTweet(){
     if(item.bodyText.length>0){
     axios.post('http://localhost:2000/blogs/create-blog',{
-      "userId":"61bed84c0bd43477309a09ae",
+      "userId":localStorage.getItem("userId"),
       "title":"tital is not required",
       "bodyText":item.bodyText,
       "images":item.images
@@ -49,29 +49,33 @@ setItem({bodyText:'',image:''});
     }))
   }
   }
-  console.log(item);
+  // console.log(item);
 
   useEffect( () => {
-    axios.post('http://localhost:2000/blogs/my-blogs',{
+    setInterval(() => {
+    axios.post('http://localhost:2000/blogs/get-blogs',{
      
-        "userId":"61bed84c0bd43477309a09ae",
+        "userId":localStorage.getItem("userId"),
         "offset":show
       }
-          ).then((data)=>{
-            if(data.data.status=='200'){
-            setblogdata(data);
+          ).then((res)=>{
+            res=res.data;
+            console.log(res);
+            if(res.status=='200'){
+              setblogdata(res);
+            
             }
             // console.log(blogdata.data.data[0].data);
-           console.log(data);
            setdel(false);
-          })
+          });
+        }, 100000);
     
-  },[item,del,show]);
+  },[item,del,show,follow]);
 
-
+console.log(blogdata);
   
-  if(!blogdata)
-   return null;
+  // if(!blogdata)
+  //  return null;
   return (
     <>
       <div className="middle-block" >
@@ -126,26 +130,19 @@ onDone={({ base64 }) => setItem({ ...item, images: base64 })}
         <h6 style={{ textAlign: "center" }}> Show more</h6>
         <hr />
       
-        { blogdata.data.data[0].data.map((oneblog)=>{
+        { blogdata ? blogdata.data.map((oneblog)=>{
           return  <><div className="blog-post" id={oneblog._id}>
             <div className="blog-head">
               <div><PersonIcon style={{ fontSize: 50 }} /></div>
-              <div style={{fontWeight:"600",flex:"1"}}>Narendra Modi_@narendramodi .21h <div className="blog-bodyText">
+              <div style={{fontWeight:"600",flex:"1"}}><span>{oneblog.userDetails.name+" "}</span><span style={{fontWeight:"400"}}>{"@"+oneblog.userDetails.username+" "+ ".21h"}</span>  <div className="blog-bodyText">
                 {oneblog.bodyText}
               </div></div>
               {/* <div className="space"></div> */}
-             <div> <button className="delete-post" id={oneblog._id} onClick={()=>deletetweet(oneblog._id,oneblog.userId)} ><DeleteIcon /></button></div>
+             <div> <button className="delete-post" id={oneblog._id} onClick={()=>deletetweet(oneblog._id)} ><DeleteIcon /></button></div>
             </div>
             <div >
               <div  style={{paddingLeft: "1.5rem"}}>
-             
-              
-
-
-  
-              {/* <div>
-               <h4>{oneblog.title}</h4>
-              </div> */}
+           
              
              </div>
               <div className="blog-icons">
@@ -161,7 +158,7 @@ onDone={({ base64 }) => setItem({ ...item, images: base64 })}
           </div>
          <hr/>
           </>
-          })
+          }):null
         }
          <div className="show-more"   style={{
           marginTop:"2rem",

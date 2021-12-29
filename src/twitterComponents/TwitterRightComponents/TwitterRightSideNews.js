@@ -21,4 +21,4 @@ function TwitterRightSideNews() {
     )
 }
 
-export default TwitterRightSideNews
+export default TwitterRightSideNews;
